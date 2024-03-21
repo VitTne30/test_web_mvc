@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-	<?php
-	$id = $_GET['id'];
-	?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +67,7 @@
 
 <body>
 	<div class="container">
-		<h2 class="tieude">Quiz kiểm tra kiến thức ngẫu nhiên</h2>
+		<h2 class="tieude">Quiz trả lời câu hỏi theo bộ câu hỏi theo danh mục</h2>
 		<div class="question" id="question">
 			<h2 id="title"></h2>
 			<ul class="answer">
@@ -91,7 +87,6 @@
 					<input type="radio" name="cautraloi" class="cautraloi" id="cau_d">
 					<label id="d_cautraloi" for="cau_d"></label>
 				</li>
-				<input id="id_danhmuc" value="" type="hidden">
 				<input id="id_question" type="hidden">
 				<input id="cau_dung" type="hidden">
 				<input id="total" type="hidden">
@@ -100,6 +95,6 @@
 		</div>
 	</div>
 </body>
-	<script type="text/javascript" src="js/DM.js"></script>
+	<script type="text/javascript" src="js/scriptDM.js"></script>
 
 </html>

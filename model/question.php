@@ -60,7 +60,7 @@ class Question{
 	}
 	
 	public function show(){
-		$query = "SELECT * FROM cauhoi WHERE id_danhmuc=? ORDER BY RAND() LIMIT 1";
+		$query = "SELECT * FROM cauhoi WHERE id_danhmuc=? AND id NOT IN (SELECT id FROM cauhoi_dalay) ORDER BY RAND() LIMIT 1";
 		
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);

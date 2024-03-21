@@ -89,6 +89,7 @@ btnSubmit.addEventListener("click", () =>{
 		container.innerHTML = `
 			<h2>Bạn đã trả lời đúng ${diem}/5 câu hỏi</h2>
 			<button onclick="location.reload()"> Thực hiện bài kiểm tra khác</button>
+			<button class="statistics-button"><a href="trangchu.html">Quay về trang chủ</a></button>
 		`
 		
 		fetch('http://localhost/test_web_mvc/api/question/truncate_cauhoi_dalay.php', {

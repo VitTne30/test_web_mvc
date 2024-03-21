@@ -1,17 +1,24 @@
+const myKeyValues = window.location.search;
+const urlParam = new URLSearchParams(myKeyValues);
+
+const id_danhmuc = urlParam.get('id');
+
+console.log("id: ", id_danhmuc);
+
 const container = document.getElementById('question');
 const cautraloi = document.querySelectorAll('.cautraloi');
 const btnSubmit = document.getElementById('submit');
 let current = 0;
 let diem = 0;
-
+//
 load_cauhoi();
-
+//
 function load_cauhoi(){
 	
 	btnSubmit.disabled = true;
 	remove_answer();
 	
-	fetch('http://localhost/test_web_mvc/api/question/show.php')
+	fetch(`http://localhost/test_web_mvc/api/question/show.php?id=${id_danhmuc}`)
 	.then(res => res.json())
 	.then(data => {
 //		document.getElementById('total').value = data.question.length;
@@ -89,6 +96,7 @@ btnSubmit.addEventListener("click", () =>{
 		container.innerHTML = `
 			<h2>Bạn đã trả lời đúng ${diem}/5 câu hỏi</h2>
 			<button onclick="location.reload()"> Thực hiện bài kiểm tra khác</button>
+			<button class="statistics-button"><a href="trangchu.html">Quay về trang chủ</a></button>
 		`
 		
 		fetch('http://localhost/test_web_mvc/api/question/truncate_cauhoi_dalay.php', {

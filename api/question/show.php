@@ -14,6 +14,9 @@ $question->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 $question->show();
 
+$question_array = [];
+$question_array['question'] = [];
+
 $question_item = array(
 	'id' => $question->id,
 	'title' => $question->title,
@@ -24,6 +27,9 @@ $question_item = array(
 	'cau_dung' => $question->cau_dung,
 	'id_danhmuc' => $question->id_danhmuc,
 );
-print_r(json_encode($question_item, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+array_push($question_array['question'], $question_item);
+
+print_r(json_encode($question_array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
 ?>

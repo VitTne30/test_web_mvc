@@ -21,7 +21,6 @@ function renderDanhmuc(data){
 		htmlString += `
 				<li>
 					<button class="statistics-button"><a href="DM.html?id=${item.id}">${item.tendanhmuc}</a></button>
-					<a href="#">${item.tendanhmuc}</a>
 					<input id="id_danhmuc" type="hidden" value="${item.id}">
 				</li>
 		`;
