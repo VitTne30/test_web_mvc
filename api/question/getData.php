@@ -9,14 +9,15 @@ $db = new db();
 $connect = $db->connect();
 
 $question = new Question($connect);
-$read = $question->read();
+$getData = $question->getData();
 
-$num = $read->rowCount();
+$num = $getData->rowCount();
+$numPage = ceil(8/$num);
 
 if($num>0){
 	$question_array = [];
 
-	while($row = $read->fetch(PDO::FETCH_ASSOC)){
+	while($row = $getData->fetch(PDO::FETCH_ASSOC)){
 		extract($row);
 		
 		$question_item = array(
@@ -28,6 +29,7 @@ if($num>0){
 			'cau_d' => $cau_d,
 			'cau_dung' => $cau_dung,
 			'id_danhmuc' => $id_danhmuc,
+			'numPage' => $numPage,
 		);
 		array_push($question_array, $question_item);
 	}

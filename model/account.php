@@ -42,20 +42,6 @@ class Account{
 		return $stmt;
 	}
 	
-	public function show(){
-		$query = "SELECT * FROM taikhoan WHERE id=:id LIMIT 1";
-		
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':id', $this->id);
-		$stmt->execute();
-		
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		
-		$this->tentaikhoan = $row['tentaikhoan'];
-		$this->matkhau = $row['matkhau'];
-		$this->email = $row['email'];
-	}
-	
 	public function create(){
 		$query = "INSERT INTO taikhoan SET tentaikhoan=:tentaikhoan , matkhau=:matkhau , email=:email ";
 		

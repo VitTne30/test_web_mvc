@@ -59,6 +59,20 @@ class Question{
 		return $stmt;
 	}
 	
+	public function getData($page = 1, $total = 8){
+		if ($page <= 0) {
+            $page = 1;
+        }
+		$tmp = ($page - 1) * $total;
+		$query = "SELECT * FROM cauhoi ORDER BY id ASC LIMIT $tmp,$total";
+		
+		$stmt = $this->conn->prepare($query);
+		
+		$stmt->execute();
+		
+		return $stmt;
+	}
+	
 	public function show(){
 		$query = "SELECT * FROM cauhoi WHERE id_danhmuc=? AND id NOT IN (SELECT id FROM cauhoi_dalay) ORDER BY RAND() LIMIT 1";
 		
