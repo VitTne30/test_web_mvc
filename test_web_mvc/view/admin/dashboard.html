@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Quản lí tài khoản</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+	
+	<style>
+		.container{
+			height: 600px;
+			background-image: 
+				conic-gradient(
+					from var(--rotate),
+					#3e7272,
+					#fff 50%
+				);
+			animation: effectBg 6s linear infinite;
+		}
+		
+		@keyframes effectBg{
+			from{
+				--rotate: 0deg;
+			} to{
+				--rotate: -360deg;
+			}
+		}
+		
+		.main h1{
+			text-align: center;
+			margin: 10% auto;
+		}
+		
+		@property --rotate{
+			syntax: "<angle>";
+			initial-value: 0deg;
+			inherits: false;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<nav>
+			<ul>
+				<li><a href="dashboard.html">Trang Chủ</a></li>
+				<li><a href="cauhoi.html">Câu hỏi</a></li>
+				<li><a href="danhmuc.html">Danh mục</a></li>
+				<li><a href="taikhoan.html">Tài khoản</a></li>
+				<li><button type="button" id="dangxuat">Đăng xuất</button></li>
+			</ul>
+        </nav>
+		
+		<div class="main">
+		</div>
+	</div>
+</body>
+	<script>
+		const main = document.querySelector('.main');
+		const btnDangxuat = document.getElementById('dangxuat');
+		
+		const admin = localStorage.getItem('tentaikhoanAdmin');
+		let htmlString = `<h1>Xin chào quản trị viên ${admin}</h1>`;
+		
+		main.innerHTML = htmlString;
+		
+		btnDangxuat.addEventListener('click', ()=>{
+			if (confirm("Xác nhận đăng xuất?") !== true) {
+				return; // Exit the function if user cancels
+			}
+			localStorage.removeItem('tentaikhoanAdmin');
+			window.location.href = "login.html";
+		})
+	</script>
+</html>

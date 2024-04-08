@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Đăng kí tài khoản</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form {
+  background-color: #fff;
+  width: 350px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.dangki {
+  background-color: #28a745;
+}
+
+.dangki:hover {
+  background-color: #218838;
+}
+	
+#btnReturn{		
+	background-color: #ec550e;
+  	margin-top: 10px;	
+}
+	
+#btnReturn:hover {
+  background-color: #ca5017;
+}
+</style>
+</head>
+
+<body>
+<form class="form">
+	<h2>Đăng kí tài khoản</h2>
+	<label for="tentaikhoan">Tên tài khoản</label>
+	<input type="text" id="tentaikhoan" name="tentaikhoan" required>
+	<label for="email">Email</label>
+	<input type="email" id="email" name="email" required>
+	<label for="matkhau">Mật khẩu</label>
+	<input type="password" id="matkhau" name="matkhau" required>
+	<label for="xacnhanmatkhau">Xác nhận Mật khẩu</label>
+	<input type="password" id="xacnhanmatkhau" name="xacnhanmatkhau" required>
+	<button type="button" id="btnCreate" class="dangki">Đăng kí</button>
+	<button type="button" id="btnReturn">Quay lại</button>
+</form>
+</body>
+	<script>
+		var btnCreate = document.querySelector('#btnCreate');
+		var btnReturn = document.querySelector('#btnReturn');
+		
+		btnReturn.addEventListener('click', ()=>{
+			window.location.href = 'login.html';
+		})
+	
+		btnCreate.addEventListener('click', () =>{
+		var check = false;
+		
+		var tentaikhoan = document.querySelector('input[name="tentaikhoan"]').value;
+		var matkhau = document.querySelector('input[name="matkhau"]').value;
+		var inputXacnhanMatkhau = document.querySelector('input[name="xacnhanmatkhau"]').value;
+		var email = document.querySelector('input[name="email"]').value;
+		
+		if (tentaikhoan.length > 0 && matkhau.length>0 && email.length>0) {
+			check = true;
+		}
+		else{
+			check = false;
+		}
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(email)) {
+		  	check = false;
+			errorMessage = "Email không hợp lệ. Vui lòng nhập đúng định dạng (e.g., example@domain.com).\n";
+			console.log(errorMessage);
+		}
+		
+		if (check == true) {
+			
+			var formData = {
+				tentaikhoan: tentaikhoan, 
+				matkhau: matkhau,
+				email: email,
+			}
+			
+			if(matkhau === inputXacnhanMatkhau) {
+		
+			fetch('http://localhost/test_web_mvc/api/account/create.php', {
+				method: 'POST',
+				headers:{
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			})
+			.then(response => {
+				return response.json();
+			})
+			.then(data =>{
+				if (data.message === 'account moi da duoc tao thanh cong') {
+					alert('Đăng kí tài khoản thành công');
+					window.location.href = 'login.html';
+				} else {
+					alert('sai!!!');
+				}
+			})
+			.catch(error => {});
+			console.log(formData);
+			}
+			else{
+				alert('Xác nhận mật khẩu không trùng khớp!!!');
+			}
+		}
+	});
+	</script>
+</html>
